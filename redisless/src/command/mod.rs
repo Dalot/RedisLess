@@ -62,6 +62,7 @@ pub enum Command {
     Ping,
     Quit,
     Dbsize,
+    RedisCommand
 }
 
 impl Command {
@@ -377,6 +378,7 @@ impl Command {
                     let key = get_bytes_vec(v.get(1))?;
                     Ok(Pttl(key))
                 }
+                b"COMMAND" | b"command" | b"Command" => Ok(RedisCommand),
                 b"INFO" | b"info" | b"Info" => Ok(Info),
                 b"PING" | b"ping" | b"Ping" => Ok(Ping),
                 b"DBSIZE" | b"dbsize" | b"Dbsize" => Ok(Dbsize),

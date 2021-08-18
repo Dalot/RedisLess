@@ -533,3 +533,4 @@ fn append() {
 
     assert_eq!(server.stop(), Some(ServerState::Stopped));
 }
+

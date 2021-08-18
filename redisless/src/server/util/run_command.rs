@@ -19,6 +19,7 @@ pub fn run_command_and_get_response<T: Storage>(
     let command = get_command(bytes);
     let response = match command {
         Ok(command) => match command {
+            Command::RedisCommand => RedisResponse::single(BulkString("".as_bytes().to_vec())),
             Command::Set(k, v) => {
                 lock_then_release(storage).write(k.as_slice(), v.as_slice());
                 RedisResponse::okay()
